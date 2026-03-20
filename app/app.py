@@ -18,6 +18,28 @@ def _load(name: str, rel: str):
     return mod
 
 
+def _safe_load(name: str, rel: str):
+    """
+    Tenta carregar um módulo de página.
+    Se falhar, retorna um módulo fictício com render() que exibe o erro,
+    sem derrubar o resto da aplicação (sidebar inclusa).
+    """
+    try:
+        return _load(name, rel)
+    except Exception as e:
+        import types
+        err_msg = str(e)
+        mod = types.ModuleType(name)
+
+        def render_error(user: dict, _msg=err_msg, _name=name):
+            st.error(f"❌ Erro ao carregar o módulo **{_name}**:\n\n```\n{_msg}\n```")
+            st.info("Verifique se todos os arquivos e dependências estão no lugar correto.")
+
+        mod.render = render_error
+        sys.modules[name] = mod
+        return mod
+
+
 import streamlit as st
 from streamlit_option_menu import option_menu
 
@@ -90,25 +112,25 @@ def _login():
 
 # ── Main app ──────────────────────────────────────────────────────────────────
 def _app(user: dict):
-    # ── Carrega todas as páginas via path absoluto (Windows-safe) ─────────
-    dash  = _load("dashboard_admin", os.path.join("ui", "pages", "dashboard_admin.py"))
-    com   = _load("comercial",       os.path.join("ui", "pages", "comercial.py"))
-    tele  = _load("telemarketing",   os.path.join("ui", "pages", "telemarketing.py"))
-    dev   = _load("devolucao",       os.path.join("ui", "pages", "devolucao.py"))
-    log   = _load("logistica",       os.path.join("ui", "pages", "logistica.py"))
-    cco   = _load("cco",             os.path.join("ui", "pages", "cco.py"))        # ← novo
-    logs  = _load("logs_admin",      os.path.join("ui", "pages", "logs_admin.py"))
+    # ── Carrega páginas com proteção contra falha de import ───────────────
+    dash  = _safe_load("dashboard_admin", os.path.join("ui", "pages", "dashboard_admin.py"))
+    com   = _safe_load("comercial",       os.path.join("ui", "pages", "comercial.py"))
+    tele  = _safe_load("telemarketing",   os.path.join("ui", "pages", "telemarketing.py"))
+    dev   = _safe_load("devolucao",       os.path.join("ui", "pages", "devolucao.py"))
+    log   = _safe_load("logistica",       os.path.join("ui", "pages", "logistica.py"))
+    cco   = _safe_load("cco",             os.path.join("ui", "pages", "cco.py"))
+    atd   = _safe_load("atendimento",     os.path.join("ui", "pages", "atendimento.py"))
+    logs  = _safe_load("logs_admin",      os.path.join("ui", "pages", "logs_admin.py"))
 
     allowed = get_allowed_pages(user)
 
-    # ── Mapeamento: nome_da_página → (ícone, função_render) ───────────────
-    #    A ordem aqui define a ordem no menu lateral.
     PAGE_MAP = {
-        "Dashboard": ("house",             dash.render),
-        "Comercial": ("shop",              com.render),
-        "Logística": ("truck",             log.render),
-        "CCO":       ("credit-card-2-front", cco.render),   # ← novo
-        "Logs":      ("file-earmark-text", logs.render),
+        "Dashboard":   ("house",               dash.render),
+        "Comercial":   ("shop",                com.render),
+        "Logística":   ("truck",               log.render),
+        "CCO":         ("credit-card-2-front", cco.render),
+        "Atendimento": ("headset",             atd.render),
+        "Logs":        ("file-earmark-text",   logs.render),
     }
 
     items = [p for p in PAGE_MAP if p in allowed]
@@ -128,18 +150,18 @@ def _app(user: dict):
                 "container":         {"padding": "0", "background-color": "transparent"},
                 "icon":              {"color": "#555c72", "font-size": "15px"},
                 "nav-link": {
-                    "font-family":  "'Nunito', sans-serif",
-                    "font-size":    "14px",
-                    "font-weight":  "700",
-                    "color":        "#8b90a8",
-                    "padding":      "10px 14px",
+                    "font-family":   "'Nunito', sans-serif",
+                    "font-size":     "14px",
+                    "font-weight":   "700",
+                    "color":         "#8b90a8",
+                    "padding":       "10px 14px",
                     "border-radius": "10px",
-                    "margin":       "2px 0",
+                    "margin":        "2px 0",
                     "--hover-color": "rgba(0,196,180,0.08)",
                 },
                 "nav-link-selected": {
                     "background-color": "rgba(0,196,180,0.12)",
-                    "color":     "#00C4B4",
+                    "color":       "#00C4B4",
                     "font-weight": "800",
                 },
             },

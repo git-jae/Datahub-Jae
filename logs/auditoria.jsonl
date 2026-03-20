@@ -1,2 +1,16 @@
 {"timestamp": "2026-03-16T14:31:21", "usuario": "admin", "categoria": "CCO-Lógico", "quantidade": 1, "status": "success", "detalhe": ""}
 {"timestamp": "2026-03-16T14:31:23", "usuario": "admin", "categoria": "CCO-Lógico", "quantidade": 1, "status": "success", "detalhe": ""}
+{"timestamp": "2026-03-19T14:22:01", "usuario": "atendimento", "categoria": "Atendimento", "quantidade": 1, "status": "success", "detalhe": ""}
+{"timestamp": "2026-03-19T14:31:50", "usuario": "admin", "categoria": "Atendimento", "quantidade": 1, "status": "success", "detalhe": ""}
+{"timestamp": "2026-03-19T14:44:00", "usuario": "admin", "categoria": "Atendimento", "quantidade": 1, "status": "success", "detalhe": ""}
+{"timestamp": "2026-03-19T14:44:08", "usuario": "admin", "categoria": "CCO-Lógico", "quantidade": 2, "status": "success", "detalhe": ""}
+{"timestamp": "2026-03-19T14:44:15", "usuario": "admin", "categoria": "CCO-Lógico", "quantidade": 0, "status": "vazio", "detalhe": ""}
+{"timestamp": "2026-03-19T14:46:56", "usuario": "admin", "categoria": "CCO-Físico", "quantidade": 1, "status": "success", "detalhe": ""}
+{"timestamp": "2026-03-19T15:45:40", "usuario": "admin", "categoria": "Atendimento", "quantidade": 1, "status": "success", "detalhe": ""}
+{"timestamp": "2026-03-20T15:43:41", "usuario": "admin", "categoria": "Telemarketing", "quantidade": 0, "status": "success", "detalhe": ""}
+{"timestamp": "2026-03-20T15:44:09", "usuario": "admin", "categoria": "Telemarketing", "quantidade": 648, "status": "success", "detalhe": ""}
+{"timestamp": "2026-03-20T16:04:01", "usuario": "admin", "categoria": "Comercial", "quantidade": 1, "status": "success", "detalhe": ""}
+{"timestamp": "2026-03-20T16:06:10", "usuario": "admin", "categoria": "Comercial", "quantidade": 1, "status": "success", "detalhe": ""}
+{"timestamp": "2026-03-20T16:06:45", "usuario": "admin", "categoria": "Comercial", "quantidade": 0, "status": "error", "detalhe": "1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')\n        SELECT\n            DOC_FUNC,\n            NM_FUNC,\n            NR_RASTR' at line 27"}
+{"timestamp": "2026-03-20T16:17:23", "usuario": "admin", "categoria": "Comercial", "quantidade": 1, "status": "success", "detalhe": ""}
+{"timestamp": "2026-03-20T16:17:26", "usuario": "admin", "categoria": "Comercial", "quantidade": 1, "status": "success", "detalhe": ""}

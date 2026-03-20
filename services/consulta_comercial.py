@@ -30,24 +30,30 @@ def consulta_banco_rastreio(lista_documentos):
     placeholders = ",".join(["%s"] * len(lista_documentos))
     query = f"""
         WITH pedidos AS (
-            SELECT
-                ip.ID_MIDIA AS ID_MIDIA_PEDIDO,
-                c.CD_CLIENTE,
-                c.NM_CLIENTE as NM_FUNC,
-                ip.NR_RASTREAMENTO AS NR_RASTREIO,
-                c2.NM_CLIENTE AS SOLICITANTE,
-                c.NR_DOCUMENTO AS DOC_FUNC,
-                ROW_NUMBER() OVER (PARTITION BY c.CD_CLIENTE ORDER BY ip.NR_ITEM_PEDIDO DESC) AS rn
-            FROM ITEM_PEDIDO ip
-            LEFT JOIN CLIENTE c ON ip.CD_CLIENTE = c.CD_CLIENTE
-            LEFT JOIN PEDIDO p ON ip.NR_PEDIDO = p.NR_PEDIDO
-            LEFT JOIN CLIENTE c2 ON p.CD_CLIENTE = c2.CD_CLIENTE
-            WHERE ip.CD_TIPO_ITEM_PEDIDO IN (3, 5, 6, 8, 10)
-              AND (ip.NR_RASTREAMENTO NOT LIKE '%GT%' AND ip.NR_RASTREAMENTO NOT LIKE '%GV%' OR ip.NR_RASTREAMENTO IS NULL)
-              AND c.NR_DOCUMENTO IN ({placeholders})
+        SELECT
+            ip.ID_MIDIA AS ID_MIDIA_PEDIDO,
+            c.CD_CLIENTE,
+            c.NM_CLIENTE as NM_FUNC,
+            ip.NR_RASTREAMENTO AS NR_RASTREIO,
+            c2.NM_CLIENTE AS SOLICITANTE,
+            c.NR_DOCUMENTO AS DOC_FUNC,
+            ROW_NUMBER() OVER (PARTITION BY c.CD_CLIENTE ORDER BY ip.NR_ITEM_PEDIDO DESC) AS rn
+        FROM ITEM_PEDIDO ip
+        LEFT JOIN CLIENTE c ON ip.CD_CLIENTE = c.CD_CLIENTE
+        LEFT JOIN PEDIDO p ON ip.NR_PEDIDO = p.NR_PEDIDO
+        LEFT JOIN CLIENTE c2 ON p.CD_CLIENTE = c2.CD_CLIENTE
+        WHERE ip.CD_TIPO_ITEM_PEDIDO IN (3, 5, 6, 8, 10)
+          AND (ip.NR_RASTREAMENTO NOT LIKE '%GT%' AND ip.NR_RASTREAMENTO NOT LIKE '%GV%' AND ip.NR_RASTREAMENTO IS NOT NULL)
+          AND c.NR_DOCUMENTO IN ({placeholders})
         )
-        SELECT DOC_FUNC, NM_FUNC, NR_RASTREIO, SOLICITANTE, ID_MIDIA_PEDIDO
-        FROM pedidos WHERE rn = 1
+    SELECT
+    DOC_FUNC,
+    NM_FUNC,
+    NR_RASTREIO,
+    SOLICITANTE,
+    ID_MIDIA_PEDIDO
+    FROM pedidos
+    WHERE rn = 1  
     """
     cursor.execute(query, lista_documentos)
     dados = cursor.fetchall()

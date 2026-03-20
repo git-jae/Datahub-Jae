@@ -18,6 +18,17 @@ def load_css():
     if p.exists():
         st.markdown(f"<style>{p.read_text()}</style>", unsafe_allow_html=True)
 
+    st.markdown("""
+        <script>
+        (function() {
+            localStorage.removeItem('stSidebarCollapsed-');
+            Object.keys(localStorage)
+                .filter(k => k.startsWith('stSidebarCollapsed'))
+                .forEach(k => localStorage.removeItem(k));
+        })();
+        </script>
+    """, unsafe_allow_html=True)
+
 
 def sidebar_logo():
     st.sidebar.markdown(f"""
