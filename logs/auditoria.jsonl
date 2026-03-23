@@ -14,3 +14,4 @@
 {"timestamp": "2026-03-20T16:06:45", "usuario": "admin", "categoria": "Comercial", "quantidade": 0, "status": "error", "detalhe": "1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')\n        SELECT\n            DOC_FUNC,\n            NM_FUNC,\n            NR_RASTR' at line 27"}
 {"timestamp": "2026-03-20T16:17:23", "usuario": "admin", "categoria": "Comercial", "quantidade": 1, "status": "success", "detalhe": ""}
 {"timestamp": "2026-03-20T16:17:26", "usuario": "admin", "categoria": "Comercial", "quantidade": 1, "status": "success", "detalhe": ""}
+{"timestamp": "2026-03-23T10:55:02", "usuario": "comercial", "categoria": "Atendimento", "quantidade": 100, "status": "success", "detalhe": ""}

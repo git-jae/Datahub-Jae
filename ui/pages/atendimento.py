@@ -9,7 +9,7 @@ def render(user: dict):
     page_header("🎧", "Consulta Atendimento")
 
     info_box(
-        "Informe o <strong style='color:#e8eaf2;'>número lógico (ou físico)do cartão</strong> "
+        "Informe o <strong style='color:#e8eaf2;'>número lógico (ou físico) do cartão</strong> "
         "para verificar se é um cartão inconsistente.<br>"
         f"A consulta analisa as transações dos <strong style='color:#e8eaf2;'>últimos 30 dias</strong>. "
         f"Separe por <code style='background:{BD};padding:1px 6px;border-radius:4px;'>vírgula</code>, "

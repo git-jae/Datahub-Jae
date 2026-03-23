@@ -60,20 +60,6 @@ def render(user: dict):
         fig2.update_layout(**_LAY, height=260, showlegend=False)
         st.plotly_chart(fig2, use_container_width=True, config={"displayModeBar":False})
 
-    _sec("Consultas por Hora")
-    dfc       = df.copy()
-    dfc["hora"] = dfc["timestamp"].dt.floor("h")
-    tl        = dfc.groupby(["hora","categoria"]).size().reset_index(name="n")
-    if not tl.empty:
-        fig3 = px.area(tl, x="hora", y="n", color="categoria",
-            color_discrete_map=_C, labels={"hora":"","n":"Consultas","categoria":""})
-        fig3.update_traces(mode="lines+markers", line_width=2)
-        fig3.update_layout(**_LAY, height=200,
-            xaxis=dict(showgrid=False,tickfont=dict(size=10)),
-            yaxis=dict(showgrid=True,gridcolor=BD,tickfont=dict(size=10)),
-            legend=dict(orientation="h",yanchor="bottom",y=1.02,font=dict(size=10)))
-        st.plotly_chart(fig3, use_container_width=True, config={"displayModeBar":False})
-
     divider()
     _sec("Últimas Execuções")
     rec = df.head(15)[["timestamp","usuario","categoria","quantidade","status"]].copy()
