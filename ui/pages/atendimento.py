@@ -19,38 +19,16 @@ def render(user: dict):
 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    tab1, tab2 = st.tabs(["📁  Upload Excel", "⌨️  Digitação Manual"])
-
-    # ── Upload Excel ──────────────────────────────────────────────────────────
-    with tab1:
-        st.markdown("<br>", unsafe_allow_html=True)
-        up = st.file_uploader(
-            "Planilha Excel",
-            type=["xlsx", "xls"],
-            key="atd_up",
-        )
-        if up:
-            try:
-                import pandas as pd
-                df_in = pd.read_excel(up)
-                valores = df_in.iloc[:, 0].dropna().astype(str).str.strip().unique().tolist()
-                st.success(f"✅ {len(valores)} número(s) lido(s).")
-                if st.button("▶  Executar Consulta", key="atd_ex"):
-                    _run(valores, user)
-            except Exception as e:
-                st.error(f"Erro ao ler planilha: {e}")
-
     # ── Digitação Manual ──────────────────────────────────────────────────────
-    with tab2:
-        st.markdown("<br>", unsafe_allow_html=True)
-        txt = st.text_area(
-            "Números lógicos",
-            height=150,
-            placeholder="3089050011111111 ou: 056826XX000",
-            key="atd_txt",
+    st.markdown("<br>", unsafe_allow_html=True)
+    txt = st.text_area(
+        "Números lógicos",
+        height=150,
+        placeholder="3089050011111111 ou: 056826XX000",
+        key="atd_txt",
         )
-        if st.button("▶  Executar Consulta", key="atd_mn"):
-            _run(parse_text_input(txt), user)
+    if st.button("▶  Executar Consulta", key="atd_mn"):
+        _run(parse_text_input(txt), user)
 
 
 def _run(valores: list, user: dict):

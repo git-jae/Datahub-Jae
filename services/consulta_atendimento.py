@@ -1,7 +1,7 @@
 import sys
 import os
 import pandas as pd
-from db.postgres_connection import conectar_t_postgres
+from db.postgres_connection import conectar_m_postgres
 from psycopg2.extras import RealDictCursor
 
 def executar_pipeline(categoria, dado_entrada):
@@ -14,7 +14,7 @@ def executar_pipeline(categoria, dado_entrada):
         num = str(dado_entrada)
 
     # 2. Execução Direta da Query (Sem depender de outros arquivos)
-    conn = conectar_t_postgres()
+    conn = conectar_m_postgres()
     cursor = conn.cursor(cursor_factory=RealDictCursor)
     
     query = """
@@ -29,7 +29,7 @@ def executar_pipeline(categoria, dado_entrada):
     try:
         cursor.execute(query, (num.strip(),))
         res = cursor.fetchone()
-        status = res['tipo_cartao'] if res else "Sem transações"
+        status = res['associacao'] if res else "Sem transações"
         
         # Retorna o DataFrame para o Streamlit
         return pd.DataFrame([{"Número Lógico": num, "Resultado": status}])

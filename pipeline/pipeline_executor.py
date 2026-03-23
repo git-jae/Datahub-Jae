@@ -4,7 +4,6 @@ from services.consulta_comercial import consultar_comercial
 from services.consulta_telemarketing import consultar_telemarketing
 from services.consulta_devolucao import consultar_devolucao
 from services.consulta_logistica import consultar_logistica
-from services.consulta_atendimento import  consultar_atendimento
     
 
 def executar_pipeline(categoria, valores_brutos):
@@ -20,7 +19,6 @@ def executar_pipeline(categoria, valores_brutos):
     elif cat == "Telemarketing":                df = consultar_telemarketing(valores)
     elif cat in ("Devolução", "Devolucao"):     df = consultar_devolucao(valores)
     elif cat in ("Logística", "Logistica"):     df = consultar_logistica(valores)
-    elif cat in ("Atendimento", "Atendimentos"): df = consultar_atendimento(valores)
     else:
         raise ValueError(f"Categoria desconhecida: {categoria}")
 

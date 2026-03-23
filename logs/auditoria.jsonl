@@ -15,3 +15,12 @@
 {"timestamp": "2026-03-20T16:17:23", "usuario": "admin", "categoria": "Comercial", "quantidade": 1, "status": "success", "detalhe": ""}
 {"timestamp": "2026-03-20T16:17:26", "usuario": "admin", "categoria": "Comercial", "quantidade": 1, "status": "success", "detalhe": ""}
 {"timestamp": "2026-03-23T10:55:02", "usuario": "comercial", "categoria": "Atendimento", "quantidade": 100, "status": "success", "detalhe": ""}
+{"timestamp": "2026-03-23T11:05:49", "usuario": "cco", "categoria": "Atendimento", "quantidade": 1, "status": "success", "detalhe": ""}
+{"timestamp": "2026-03-23T11:07:24", "usuario": "cco", "categoria": "CCO-Lógico", "quantidade": 1, "status": "success", "detalhe": ""}
+{"timestamp": "2026-03-23T11:07:36", "usuario": "cco", "categoria": "Atendimento", "quantidade": 1, "status": "success", "detalhe": ""}
+{"timestamp": "2026-03-23T11:07:45", "usuario": "cco", "categoria": "Atendimento", "quantidade": 1, "status": "success", "detalhe": ""}
+{"timestamp": "2026-03-23T11:08:48", "usuario": "cco", "categoria": "Atendimento", "quantidade": 1, "status": "success", "detalhe": ""}
+{"timestamp": "2026-03-23T14:54:29", "usuario": "admin", "categoria": "Atendimento", "quantidade": 1, "status": "success", "detalhe": ""}
+{"timestamp": "2026-03-23T14:54:44", "usuario": "admin", "categoria": "CCO-Lógico", "quantidade": 1, "status": "success", "detalhe": ""}
+{"timestamp": "2026-03-23T15:07:29", "usuario": "admin", "categoria": "Atendimento", "quantidade": 1, "status": "success", "detalhe": ""}
+{"timestamp": "2026-03-23T15:20:07", "usuario": "admin", "categoria": "Atendimento", "quantidade": 1, "status": "success", "detalhe": ""}
